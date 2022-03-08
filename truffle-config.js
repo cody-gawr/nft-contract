@@ -18,7 +18,8 @@
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+require("dotenv").config();
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
@@ -44,11 +45,11 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+    development: {
+      host: "127.0.0.1", // Localhost (default: none)
+      port: 8545, // Standard Ethereum port (default: none)
+      network_id: "*", // Any network (default: none)
+    },
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
@@ -74,6 +75,27 @@ module.exports = {
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
+    rinkeby: {
+      provider: () =>
+        new HDWalletProvider(
+          process.env.MNENOMIC,
+          "https://rinkeby.infura.io/v3/" + process.env.INFURA_API_KEY
+        ),
+      network_id: 4,
+      gas: 3000000,
+      gasPrice: 10000000000,
+    },
+    // main ethereum network(mainnet)
+    main: {
+      provider: () =>
+        new HDWalletProvider(
+          process.env.MNENOMIC,
+          "https://mainnet.infura.io/v3/" + process.env.INFURA_API_KEY
+        ),
+      network_id: 1,
+      gas: 3000000,
+      gasPrice: 10000000000,
+    },
   },
 
   // Set default mocha options here, use special reporters etc.
