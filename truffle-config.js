@@ -75,6 +75,26 @@ module.exports = {
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
+    ropsten: {
+      provider: () =>
+        new HDWalletProvider(
+          process.env.MNENOMIC,
+          "https://ropsten.infura.io/v3/" + process.env.INFURA_API_KEY
+        ),
+      network_id: 3,
+      gas: 3000000,
+      gasPrice: 10000000000,
+    },
+    kovan: {
+      provider: () =>
+        new HDWalletProvider(
+          process.env.MNENOMIC,
+          "https://kovan.infura.io/v3/" + process.env.INFURA_API_KEY
+        ),
+      network_id: 42,
+      gas: 3000000,
+      gasPrice: 10000000000,
+    },
     rinkeby: {
       provider: () =>
         new HDWalletProvider(
