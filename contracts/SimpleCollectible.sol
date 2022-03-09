@@ -29,7 +29,7 @@ contract SimpleCollectible is ERC721, Ownable {
     Counters.Counter private _tokenIdCounter;
     
     uint public maxSupply = 300;
-    uint public tokenPrice = 0.5 ether;
+    uint public tokenPrice = 0.1 ether;
     bool public saleStarted = false;
     bool public transfersEnabled = false;
 
