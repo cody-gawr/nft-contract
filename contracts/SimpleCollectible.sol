@@ -19,7 +19,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 */
 
-contract SimpleCollectible is ERC721, Ownable {
+contract Aether is ERC721, Ownable {
 
     using Strings for uint;
     using Counters for Counters.Counter;
@@ -38,7 +38,7 @@ contract SimpleCollectible is ERC721, Ownable {
     constructor(
         string memory tokenURI_,
         string memory contractURI_
-    ) ERC721("SimpleCollectible", "SIMPLE") {
+    ) ERC721("Aether", "AETH") {
         _tokenURI = tokenURI_;
         _contractURI = contractURI_;
     }
