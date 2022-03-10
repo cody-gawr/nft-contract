@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import pinataSDK from "@pinata/sdk";
 import dotenv from "dotenv";
 import { Random } from "random-js";
@@ -13,15 +14,17 @@ async function uploadImageToPinata(): Promise<string> {
   );
   const random = new Random();
   const pinataGatewayBaseUrl = "https://gateway.pinata.cloud/ipfs/";
-  const metadataPath = "./metadata/local/";
-  console.log(pinataGatewayBaseUrl);
-  const imageFiles = fs.readdirSync(metadataPath);
+  const imageFiles = fs.readdirSync(
+    path.resolve(__dirname, "./metadata/local")
+  );
   if (imageFiles.length > 0) {
     const randomIdx = random.integer(0, imageFiles.length - 1);
     const imageName = imageFiles[randomIdx];
     try {
       const { IpfsHash } = await pinata.pinFileToIPFS(
-        fs.createReadStream(`${metadataPath}${imageName}`)
+        fs.createReadStream(
+          path.resolve(__dirname, `./metadata/local/${imageName}`)
+        )
       );
 
       return `${pinataGatewayBaseUrl}${IpfsHash}`;
