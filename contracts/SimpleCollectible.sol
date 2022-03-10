@@ -56,6 +56,20 @@ contract SimpleCollectible is ERC721, Ownable {
     }
 
     /**
+    * @notice Function modifier that is used to determmine if the caller is 
+    * the token owner. If not, run addtional checks before proceeding.
+    */
+    modifier onlyTokenOwner(uint _tokenId) {
+        require(msg.sender == ownerOf(_tokenId), "Caller is not the token owner.");
+        _;
+    }
+
+    modifier tokenExists(uint _tokenId) {
+        require(_exists(_tokenId), "Token does not exist.");
+        _;
+    }
+
+    /**
     * @notice Function that is used to mint a token.
     */
     function mint() public payable {
@@ -102,10 +116,9 @@ contract SimpleCollectible is ERC721, Ownable {
     *
     * @param _tokenId The token ID to extend/renew.
     */
-    function renewToken(uint _tokenId) public payable {
+    function renewToken(uint _tokenId) public payable tokenExists(_tokenId) onlyTokenOwner(_tokenId) {
         require(tx.origin == msg.sender, "Caller must not be a contract.");
         require(msg.value == tokenPrice, "Incorrect Ether amount.");
-        require(_exists(_tokenId), "Token does not exist.");
 
         uint _currentexpiryTime = expiryTime[_tokenId];
 
