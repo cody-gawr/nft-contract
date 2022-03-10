@@ -6,10 +6,14 @@ module.exports = (artifacts: Truffle.Artifacts, web3: Web3) => {
     network: Network,
     accounts: string[]
   ) => {
-    const NFT = artifacts.require("SimpleCollectible");
+    const Aether = artifacts.require("Aether");
 
-    await deployer.deploy(NFT, "first_parameter", "second_parameter");
-    const nft = await NFT.deployed();
+    await deployer.deploy(
+      Aether,
+      "https://our-server-api/metadata",
+      "https://contract-uri"
+    );
+    const nft = await Aether.deployed();
     console.log(`Metacoin deployed at ${nft.address} in network: ${network}.`);
   };
 };

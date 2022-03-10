@@ -37,7 +37,10 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-
+  plugins: ["truffle-plugin-verify"],
+  api_keys: {
+    etherscan: process.env.ETHERSCAN_API_KEY,
+  },
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
@@ -79,7 +82,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.MNENOMIC,
-          "https://ropsten.infura.io/v3/" + process.env.INFURA_API_KEY
+          "https://ropsten.infura.io/v3/" + process.env.INFURA_PROJECT_ID
         ),
       network_id: 3,
       gas: 3000000,
@@ -89,7 +92,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.MNENOMIC,
-          "https://kovan.infura.io/v3/" + process.env.INFURA_API_KEY
+          "https://kovan.infura.io/v3/" + process.env.INFURA_PROJECT_ID
         ),
       network_id: 42,
       gas: 3000000,
@@ -99,11 +102,11 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.MNENOMIC,
-          "https://rinkeby.infura.io/v3/" + process.env.INFURA_API_KEY
+          "https://rinkeby.infura.io/v3/" + process.env.INFURA_PROJECT_ID
         ),
       network_id: 4,
-      gas: 3000000,
-      gasPrice: 10000000000,
+      // gas: 300000000,
+      // gasPrice: 10000000000,
     },
     // main ethereum network(mainnet)
     main: {
