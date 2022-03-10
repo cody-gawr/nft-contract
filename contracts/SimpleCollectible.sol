@@ -64,6 +64,10 @@ contract SimpleCollectible is ERC721, Ownable {
         _;
     }
 
+    /**
+    * @notice Function modifier that is used to determmine if the token exists.
+    * If not, run addtional checks before proceeding.
+    */
     modifier tokenExists(uint _tokenId) {
         require(_exists(_tokenId), "Token does not exist.");
         _;
