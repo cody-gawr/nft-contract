@@ -14,8 +14,8 @@ import "@openzeppelin/contracts/utils/Strings.sol";
   \__/\  /  (____  /__||__| |____/ 
        \/        \/               
 
-@title ERC-721 token for Waifu - ＵｗＵ
-@author ItsCuzzo
+@title ERC-721 token for Aether - ＵｗＵ
+@author Ninja Dev (PySlayer)
 
 */
 
