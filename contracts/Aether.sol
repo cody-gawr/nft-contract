@@ -6,19 +6,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-/* 
- __      __        .__  _____      
-/  \    /  \_____  |__|/ ____\_ __ 
-\   \/\/   /\__  \ |  \   __\  |  \
- \        /  / __ \|  ||  | |  |  /
-  \__/\  /  (____  /__||__| |____/ 
-       \/        \/               
-
-@title ERC-721 token for Aether - ＵｗＵ
-@author Ninja Dev (PySlayer)
-
-*/
-
 contract Aether is ERC721, Ownable {
 
     using Strings for uint;
