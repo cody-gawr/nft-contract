@@ -6,6 +6,14 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
+/* 
+
+
+@title ERC-721 token for Aether - ＵｗＵ
+@author Ninja Dev (PySlayer)
+
+*/
+
 contract Aether is ERC721, Ownable {
 
     using Strings for uint;
@@ -19,6 +27,7 @@ contract Aether is ERC721, Ownable {
     uint public tokenPrice = 0.1 ether;
     bool public saleStarted = false;
     bool public transfersEnabled = false;
+    uint public expirationTime = 30 days;
 
     mapping(uint => uint) public expiryTime;
 
@@ -76,7 +85,7 @@ contract Aether is ERC721, Ownable {
         _tokenIdCounter.increment();
 
         _safeMint(msg.sender, tokenIndex);
-        expiryTime[tokenIndex] = block.timestamp + 30 days;
+        expiryTime[tokenIndex] = block.timestamp + expirationTime;
     }
 
     /**
@@ -99,7 +108,7 @@ contract Aether is ERC721, Ownable {
         _tokenIdCounter.increment();
 
         _safeMint(_receiver, tokenIndex);
-        expiryTime[tokenIndex] = block.timestamp + 30 days;
+        expiryTime[tokenIndex] = block.timestamp + expirationTime;
     }
 
     /**
@@ -114,9 +123,9 @@ contract Aether is ERC721, Ownable {
         uint _currentexpiryTime = expiryTime[_tokenId];
 
         if (block.timestamp > _currentexpiryTime) {
-            expiryTime[_tokenId] = block.timestamp + 30 days;
+            expiryTime[_tokenId] = block.timestamp + expirationTime;
         } else {
-            expiryTime[_tokenId] += 30 days;
+            expiryTime[_tokenId] += expirationTime;
         }
     }
 
@@ -132,9 +141,9 @@ contract Aether is ERC721, Ownable {
         uint _currentexpiryTime = expiryTime[_tokenId];
 
         if (block.timestamp > _currentexpiryTime) {
-            expiryTime[_tokenId] = block.timestamp + 30 days;
+            expiryTime[_tokenId] = block.timestamp + expirationTime;
         } else {
-            expiryTime[_tokenId] += 30 days;
+            expiryTime[_tokenId] += expirationTime;
         }
     }
 
@@ -312,4 +321,7 @@ contract Aether is ERC721, Ownable {
         _transfer(from, to, tokenId);
     }
 
+    function setExpirationTime(uint _expirationTime) public onlyOwner {
+        expirationTime = _expirationTime * 1 days;
+    }
 }
